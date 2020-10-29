@@ -68,10 +68,10 @@
                         <span><a href="https://www.google.com/gmail/about/">Google</a></span></p>
                     <p>-------------------- or -------------------</p>
                     <input 
-                        id="signup_email" 
+                        id="signup-email" oninvalid="InvalidMsg(this);"
+                        oninput="InvalidMsg(this);" name="email" 
                         type="email" 
                         placeholder="Email Address" 
-                        name="email" 
                         tabindex="1"
                         required
                     >
@@ -108,6 +108,7 @@
                         name="date"
                         type="date"
                         tabindex="5"
+                        required
                     >
                     <p> We'll send you marketing promotions, special offers, inspiration and policy updates via email.</p>
                     <button type="submit" class= "signup" >Signup</button>
