@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>WEB322 Assignment1</title>
+    
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+          rel="stylesheet"
+        />
+    
+        <link rel="stylesheet" href="style.css" type="text/css" />
+    </head>
+    <body>
+      <header>
+        <div id="store_name">
+            <h3>
+                Holiday & Home
+            </h3>
+        </div>
+
+        <div id="search-wrapper">
+            <input value="Start your search" />
+            <button><i class="material-icons">search</i></button>  
+        </div>
+        <div id="user-options">
+            <div class="login">
+                <i class="material-icons" onclick="openForm()">account_circle</i>
+            </div> 
+            <div class="form-popup" id="myForm">
+                <form action="/action_page.php" class="form-container">
+                  <h1>Login</h1>
+              
+                  <label for="email"><b>Email</b></label>
+                  <input type="text" placeholder="Enter Email" name="email" required>
+              
+                  <label for="psw"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="psw" required>
+              
+                  <button type="submit" class="btn">Login</button>
+                  <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+              </div> 
+            <div class="dropdown">
+                <div class="hamburger" onclick="myFunction()">
+                   <div class="bar1"></div>
+                   <div class="bar2"></div>
+                   <div class="bar3"></div>
+                 </div>
+                 <div id="myDropdown" class="dropdown-content">
+                   <a href="signup">Sign Up</a>
+                   <a href="/">Home</a>
+                   <a href="rooms">Room Listing</a>
+                 </div>
+                 
+            </div>
+            
+        </div>
+        
+    </header>
+        
+        <main>
+            <div class="signupForm">
+                <form action="/dashboard" method="POST" >
+                    <p>Sign up with <span><a href="https://www.facebook.com">Facebook</a></span> or 
+                        <span><a href="https://www.google.com/gmail/about/">Google</a></span></p>
+                    <p>-------------------- or -------------------</p>
+                    <input 
+                        id="signup_email" 
+                        type="text" 
+                        placeholder="Email Address" 
+                        name="email" 
+                        tabindex="1"
+                        required
+                    >
+                    <input 
+                        id="signup-firstname"
+                        type="text" 
+                        placeholder="First Name" 
+                        name="firstname" 
+                        tabindex="2"
+                        required
+                    >
+                    <input 
+                        id="signup-lastname"
+                        type="text" 
+                        placeholder="Last Name" 
+                        name="lastname" 
+                        tabindex="3"
+                        required
+                    >
+                    <input 
+                        id="signup-password"
+                        type="password" 
+                        placeholder="Create Password" 
+                        name="password"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        title="Must contain at least one number, one uppercase and lowercase letter and atleast 8 or more characters" 
+                        tabindex="4"
+                        required
+                    >
+                    <h3>Birthday</h3>
+                    <p>To sign up, you need to be at least 18. Other people who use Airbnb won't see your birthday. </p>
+                    <input
+                        id="birth-date"
+                        name="date"
+                        type="date"
+                        tabindex="5"
+                    >
+                    <p> We'll send you marketing promotions, special offers, inspiration and policy updates via email.</p>
+                    <button type="submit" class= "signup" >Signup</button>
+                </form>
+            </div>
+            <div id="footer">
+                <section id="upper-footer">
+                    <div id="email">
+                      <a href="contact.html"><i class="material-icons">email</i> Contact Us</a>
+                    </div>
+                    <div id="phone">
+                      <a href="tel:4164905151"><i class="material-icons">phone</i>Phone</a>
+                    </div>
+                    <div id="app">
+                      <a href="subscribe.html"><i class="material-icons">drafts</i>Subscribe</a>
+                    </div>
+                  </section>
+                <section id="lower-footer">
+                    <div id="social-media">
+                      <a href="https://twitter.com" target="_blank">
+                        <img src="./images/twitter.png" alt="Twitter" width="20" height="20" />
+                      </a>
+                      <a href="https://facebook.com" target="_blank">
+                        <img src="./images/facebook.png" alt="Facebook" width="20" height="20" />
+                      </a>
+                      <a href="https://instagram.com" target="_blank">
+                        <img src="./images/instagram.png" alt="Instagram" width="20" height="20" />
+                      </a>
+                    </div>
+                    <div id="policy">
+                      <div>Privacy Policy</div>
+                      <div>Terms & Conditions</div>
+                      <div>Site Feedback</div>
+                    </div>
+                    <div id="copy">
+                      &copy; Shamima Rahman 2020
+                    </div>
+                </section>
+            </div>
+        </main>
+        <script type="text/javascript" src="index.js"></script>
+    </body>
+
+</html>

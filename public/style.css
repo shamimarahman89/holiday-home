@@ -1,0 +1,317 @@
+html,body {
+  height: 100%;
+  overflow-anchor: auto;
+}
+body {
+  font-family: Roboto, sans-serif;
+  margin: 0;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  overflow: visible;
+  background-color: rgb(170, 196, 230);
+  height: 10vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+#store_name {
+    font-family: monospace;
+    font-size: 1.5em;
+    width: 200px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-left: 15px;
+}
+#search-wrapper {
+    margin-top: 25px;
+    display: flex;
+    flex: 1;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    max-width: 225px;
+    height: 40px;
+}
+#search-wrapper input {
+    padding-left: 10px;
+    font-size: 1em;
+    border: solid white;
+    border-radius: 25px; 
+    background-color: solid white;
+}
+#search-wrapper button {
+    color: white;
+    height: 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: solid rgb(71, 17, 41);
+    background-color: rgb(71, 17, 41);
+    border-radius: 25px;
+    max-width: 35px;
+    margin-top: 2px;
+}
+#user-options {
+    margin: 20px;
+    padding-left: 100px;
+    padding-right: 50px;
+    display: flex;
+    justify-content: space-evenly;
+} 
+#user-options > i {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.login{
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.hamburger {
+    cursor: pointer;
+    color: #333;
+    list-style: none;
+    float: right;
+    padding: 10px;
+    position: relative;
+    display: inline-block;
+    width: 20px;
+}
+  
+.hamburger>div {
+    height: 2px;
+    background-color: black;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: bottom;
+    display: inline-block;
+    padding-right: 50px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+.show {
+    display: block;
+}
+.signupForm {
+    box-sizing: border-box;
+    padding-top: 2em;
+    margin: 5em;
+    margin-left: 15em;
+    margin-right: 15em;
+    border: 2px solid rgb(126, 123, 123);
+    background-color: rgb(193, 212, 205);
+}
+.signupForm input{
+    width: 95%;
+    padding: 12px 20px;
+    margin: 8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    align-items: center;
+}
+.signupForm h3,p{
+    text-align: center;
+}
+.signupForm button{
+    width: 95%;
+    background-color: #51774a;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+}
+.signupForm button:hover{
+    background-color: #214221;
+}
+main {
+    padding-top: 10vh;
+}
+#main-body {
+    display: flex;
+    overflow: hidden;
+}
+#footer {
+    background-color: rgb(223, 217, 220);
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+#upper-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(218, 231, 245);
+    padding-top: 10px;
+  }  
+#lower-footer {
+    align-items: center;
+    border-top: 2px solid rgb(212, 208, 208);
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+#social-media {
+    display: flex;
+    justify-content: space-around;
+    width: 100px;
+}
+#policy {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 450px;
+}
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+  
+  /* Add styles to the form container */
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+  
+  /* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+    width: 90%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+  
+  /* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+  
+  /* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+  
+  /* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: red;
+}
+  
+  /* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+.bookingForm{
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 1px solid lightgray;
+    max-width: 90%;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-left: 80px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    background-color: #bdbc94;
+}
+.bookingForm h2{
+    text-align: center;
+}
+.bookingForm label{
+    padding-left:2em;
+}
+.container{
+    width: 100%;
+    height: 650px;
+}
+.container img{
+    width: 100%;
+    height: auto;
+}
+@supports(object-fit: cover){
+    .container img{
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+.row {
+    display: flex;
+    
+} 
+.column {
+    flex: 33.33%;
+    border-radius: 25px;
+    border: 1px solid rgb(243, 240, 240);
+    margin: 2em;
+    
+}
+@media screen and (max-width: 500px) {
+    .column {
+      width: 100%;
+    }
+}
+#i-content {
+    display: flex;
+    flex: 12;
+    /*align-items: flex-start;*/
+    flex-flow: row wrap;
+    justify-content: center;
+}
+#text-content{
+    text-align: center;
+}
