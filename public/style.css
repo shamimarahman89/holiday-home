@@ -315,3 +315,7 @@ main {
 #text-content{
     text-align: center;
 }
+#dashboardBody{
+    margin: 2em;
+    padding-left: 2em;
+}
