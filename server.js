@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 var nodemailer = require('nodemailer');
 var mongoose = require("mongoose");
+var bcrypt = require('bcryptjs');
+const { isUndefined } = require("util");
 
 const HTTP_PORT = process.env.PORT || 8080;
 
@@ -38,21 +40,6 @@ var userSchema = new Schema({
 });
 var User = mongoose.model("users", userSchema);
 
-/* User.find({ email: "srahman71@myseneca.ca" })
-  .exec()
-  .then((user) => {
-    if(!user) {
-      console.log("No user could be found");
-    } else {
-      console.log(user);
-    }
-  })
-  .catch((err) => {
-    console.log(`There was an error: ${err}`);
-  });
-});
- */
-
 // call this function after the http server starts listening for requests
 function onHttpStart() {
   console.log("Express http server listening on: " + HTTP_PORT);
@@ -77,45 +64,91 @@ app.get("/signup", function(req,res){
 app.listen(HTTP_PORT, onHttpStart);
 
 // Respond to the client with data
-app.post("/dashboard", (req, res) => {
+app.post("/signup-submit", (req, res) => {
   var signupData = req.body;
 
-  // creating model for db insert
-  var user = new User({
-    "email": signupData.email,
-    "firstName": signupData.firstname,
-    "lastName": signupData.lastname,
-    "password": signupData.password,
-    "birthdate": new Date(signupData.date)
-  });
+  // checking if user exist in db
+  User.find({ email: signupData.email })
+  .exec()
+  .then((user) => {
+    if(user === undefined || user.length == 0) {
+      console.log("No user could be found");
+      
+      
+      // use salt for password encryption
+      var salt = bcrypt.genSaltSync(10);
 
-  // save the user
- user.save((err) => {
-  if(err) {
-    console.log(`There was an error saving the user : ${err}`);
-  } else {
-    console.log("The user was saved to the users collection");
-  }
- });
+      // envrypting the password
+      var hash = bcrypt.hashSync(signupData.password, salt);
+      
+      // To check a password
+      // Load hash from your password DB.
+      // bcrypt.compareSync("B4c0/\/", hash); // true
+    
 
-  // code to mail confirmation of signup
-  var mailOptions = {
-    from: 'rahmanshamima328@gmail.com',
-    to: signupData.email,
-    subject: 'Signup confirmation',
-    text: 'Welcome...Thank you for signing up ' + signupData.firstname + ' ' + signupData.lastname +'.'
-  };
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
+      // creating model for db insert
+      var newUser = new User({
+        "email": signupData.email,
+        "firstName": signupData.firstname,
+        "lastName": signupData.lastname,
+        "password": hash,
+        "birthdate": new Date(signupData.date)
+      });
+
+      // save the user
+      newUser.save((err) => {
+        if(err) {
+          console.log(`There was an error saving the user : ${err}`);
+          var errormessage = "Sorry something went wrong."
+          res.render('error_dashboard', {
+            error: errormessage,
+            layout: false 
+          }); 
+        } 
+        else {
+          console.log("The user was saved to the users collection");
+
+          // code to mail confirmation of signup
+          var mailOptions = {
+            from: 'rahmanshamima328@gmail.com',
+            to: signupData.email,
+            subject: 'Signup confirmation',
+            text: 'Welcome...Thank you for signing up ' + signupData.firstname + ' ' + signupData.lastname +'.'
+          };
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } 
+            else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+
+          // forward the user to a dashboard
+          res.render('dashboard', {
+            data: signupData,
+            layout: false 
+          }); 
+        }
+      });
+
+    } 
+    else {
+      console.log("user already exists.");
+      console.log(user);
+      var errormessage = "This email: " + user[0].email + " already exists.";
+      res.render('error_dashboard', {
+        error: errormessage,
+        layout: false 
+      }); 
     }
+  })
+  .catch((err) => {
+    console.log(`There was an error: ${err}`);
+    var errormessage = "Sorry something went wrong."
+    res.render('error_dashboard', {
+      error: errormessage,
+      layout: false 
+    }); 
   });
-
-  // forward the user to a dashboard
-  res.render('dashboard', {
-    data: signupData,
-    layout: false 
-  }); 
 });
