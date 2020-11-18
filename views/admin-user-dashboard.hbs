@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Signup-Dashboard</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="style.css" type="text/css" />
+    </head>
+
+    <body>
+        <header>
+            <div id="store_name">
+                <h3>
+                    Holiday & Home
+                </h3>
+            </div>
+
+            <div id="search-wrapper">
+                <input value="Start your search" />
+                <button><i class="material-icons">search</i></button>  
+            </div>
+            <div id="user-options">
+                <div class="login">
+                    <i class="material-icons" onclick="openForm()">account_circle</i>
+                </div> 
+                <div class="form-popup" id="myForm">
+                    <form action="/login-submit" method="POST" class="form-container">
+                      <h1>Login</h1>
+                  
+                      <label for="email"><b>Email</b></label>
+                      <input type="email" placeholder="Enter Email" name="email" required>
+                  
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="password" required>
+                  
+                      <button type="submit" class="btn">Login</button>
+                      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                  </div> 
+                <div class="dropdown">
+                    <div class="hamburger" onclick="myFunction()">
+                       <div class="bar1"></div>
+                       <div class="bar2"></div>
+                       <div class="bar3"></div>
+                     </div>
+                     <div id="myDropdown" class="dropdown-content">
+                       <a href="signup">Sign Up</a>
+                       <a href="/">Home</a>
+                       <a href="rooms">Room Listing</a>
+                     </div>
+                     
+                </div>
+                
+            </div>
+            
+        </header>
+        <main>
+            <div id=dashboardBody>
+                <h1> Admin Dashboard </h1>
+                <h2> Welcome !  {{data.firstName}} {{data.lastName}} </h2>
+                <class =logout-link>
+                    <button type="submit" class="btn">Logout</button>
+                </class>
+                
+            </div>
+            
+        </main>
+        
+        <script type="text/javascript" src="index.js"></script>
+    </body>
+</html>

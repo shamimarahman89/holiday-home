@@ -39,8 +39,8 @@ app.use(clientSessions({
 }));
 
 // A simple user object, hardcoded for this example
-// const User = {
-//   username: "sampleuser",
-//   password: "samplepassword",
-//   email: "sampleuser@example.com"
-// };
+const User = {
+  email: "sampleuser@example.com",
+  password: "samplepassword"
+  
+};
