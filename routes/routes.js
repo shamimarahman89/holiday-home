@@ -16,6 +16,18 @@ var transporter = nodemailer.createTransport({
     }
   });
 
+ 
+// This is a helper middleware function that checks if a user is logged in
+// we can use it in any route that we want to protect against unauthenticated access.
+// A more advanced version of this would include checks for authorization as well after
+// checking if the user is authenticated
+function ensureLogin(req, res, next) {
+    if (req.session.user === undefined) {
+      res.redirect("/");
+    } else {
+      next();
+    }
+  }
 
 // setup a 'route' to listen on the default url path (http://localhost)
 router.get("/", function(req,res){
@@ -28,6 +40,16 @@ router.get("/rooms", function(req,res){
 
 router.get("/signup", function(req,res){
     res.sendFile(path.join(__dirname, '../views', 'signup.html'));
+});
+
+// a route that ensures that the session is set and user is logged in
+router.get("/regular-dashboard", ensureLogin, (req, res) => {
+    res.render("regular-user-dashboard", {user: req.session.user, layout: false});
+});
+
+// a route that ensures that the session is set and user is logged in
+router.get("/admin-dashboard", ensureLogin, (req, res) => {
+    res.render("admin-user-dashboard", {user: req.session.user, layout: false});
 });
 
 
@@ -138,23 +160,18 @@ router.post("/signup-submit", (req, res) => {
         else {
             if(bcrypt.compareSync(loginData.password, user[0].password)){
                 // login successful
-                var userData = {
-                    "firstName": user[0].firstName,
-                    "lastName": user[0].lastName
-                }
-                if(user[0].userType === "regular"){
-                    res.render('regular-user-dashboard', {
-                        data: userData,
-                        layout: false 
+                // Add the user on the session and redirect them to the dashboard page.
+                req.session.user = {
+                    firstName: user[0].firstName,
+                    lastName: user[0].lastName,
+                    userType: user[0].userType
+                };
 
-                    });
+                if(user[0].userType === "regular"){
+                    res.redirect("/regular-dashboard");
                 }
                 else{
-                    res.render('admin-user-dashboard', {
-                        data: userData,
-                        layout: false 
-
-                    });
+                    res.redirect("/admin-dashboard");
                 }
             }
             else{
@@ -176,6 +193,12 @@ router.post("/signup-submit", (req, res) => {
         }); 
     });
 });
+
+// route for logout
+router.get("/logout", function(req, res) {
+    req.session.reset();
+    res.redirect("/");
+  });
 
 
 

@@ -16,19 +16,6 @@ app.set('view engine', '.hbs');
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// call this function after the http server starts listening for requests
-function onHttpStart() {
-  console.log("Express http server listening on: " + HTTP_PORT);
-}
-// Setup the static folder that static resources can load from
-// like images, css files, etc.
-app.use(express.static(path.join(__dirname, 'public')));
-
-// add the routes
-app.use('/', routes);
-  
-// setup http server to listen on HTTP_PORT
-app.listen(HTTP_PORT, onHttpStart);
 
 // Setup client-sessions
 app.use(clientSessions({
@@ -38,9 +25,19 @@ app.use(clientSessions({
   activeDuration: 1000 * 60 // the session will be extended by this many ms each request (1 minute)
 }));
 
-// A simple user object, hardcoded for this example
-const User = {
-  email: "sampleuser@example.com",
-  password: "samplepassword"
+// Setup the static folder that static resources can load from
+// like images, css files, etc.
+app.use(express.static(path.join(__dirname, 'public')));
+
+// add the routes
+app.use('/', routes);
   
-};
+
+// call this function after the http server starts listening for requests
+function onHttpStart() {
+  console.log("Express http server listening on: " + HTTP_PORT);
+}
+
+// setup http server to listen on HTTP_PORT
+app.listen(HTTP_PORT, onHttpStart);
+

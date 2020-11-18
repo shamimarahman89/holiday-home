@@ -59,9 +59,11 @@
         <main>
             <div id=dashboardBody>
                 <h1> Admin Dashboard </h1>
-                <h2> Welcome !  {{data.firstName}} {{data.lastName}} </h2>
+                <h2> Welcome !  {{user.firstName}} {{user.lastName}} </h2>
                 <class =logout-link>
-                    <button type="submit" class="btn">Logout</button>
+                    <form method="get" action="/logout">
+                        <button type="submit" class="btn">Logout</button>
+                    </form>
                 </class>
                 
             </div>
