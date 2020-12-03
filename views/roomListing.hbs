@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>WEB322 Assignment2</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="style.css" type="text/css" />
+    </head>
+    <body>
+        <header>
+            <div id="store_name">
+                <h3>
+                    Holiday & Home
+                </h3>
+            </div>
+
+            <div id="search-wrapper">
+                <input value="Start your search" />
+                <button><i class="material-icons">search</i></button>  
+            </div>
+            <div id="user-options">
+              {{#if data.login}}
+                <div class="login">
+                    <i class="material-icons" onclick= data.firstName >account_circle</i>
+                </div> 
+                 
+                <div class="dropdown">
+                    <div class="hamburger" onclick="myFunction()">
+                       <div class="bar1"></div>
+                       <div class="bar2"></div>
+                       <div class="bar3"></div>
+                     </div>
+                     <div id="myDropdown" class="dropdown-content">
+                       <a href="/">Home</a>
+                       <a href="rooms">View Listing</a>
+                       <a href="logout">Logout</a>
+                     </div>
+                     
+                </div>
+                
+            </div>
+              {{else}} 
+                <div class="login">
+                    <i class="material-icons" onclick="openForm()">account_circle</i>
+                </div>  
+              
+                <div class="form-popup" id="myForm">
+                    <form action="/login-submit" method="POST" class="form-container">
+                      <h1>Login</h1>
+                  
+                      <label for="email"><b>Email</b></label>
+                      <input type="email" placeholder="Enter Email" name="email" required>
+                  
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="password" required>
+                  
+                      <button type="submit" class="btn">Login</button>
+                      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                  </div> 
+                <div class="dropdown">
+                    <div class="hamburger" onclick="myFunction()">
+                       <div class="bar1"></div>
+                       <div class="bar2"></div>
+                       <div class="bar3"></div>
+                     </div>
+                     <div id="myDropdown" class="dropdown-content">
+                       <a href="signup">Sign Up</a>
+                       <a href="/">Home</a>
+                       <a href="rooms">Room Listing</a>
+                     </div>
+                     
+                </div>
+              {{/if}}
+                
+            </div>
+            
+        </header>
+        <body>
+            <main>
+                <section id="text-content">
+                    <h1>Room Listing  </h1>
+                </section>
+                <section id="i-content">
+                  {{#each data}}
+                    <figure>
+                        <img src="./images/listing/{{roomImage}}" width= "350px" height= "250px">
+                        <figcaption> {{roomTitle}}  <br> 
+                                      CAD {{roomPrice}} per night  <br>
+                                      {{roomDetail}} <br>
+                                      {{roomLocation}}
+                        </figcaption>
+                    </figure>
+                  {{else}}
+                      No Data Available
+                  {{/each}}
+                    
+                </section>
+                <div id="footer">
+                    <section id="upper-footer">
+                        <div id="email">
+                          <a href="mailto:shamimarahman89@gmail.com"><i class="material-icons">email</i> Contact Us</a>
+                        </div>
+                        <div id="phone">
+                          <a href="tel:4164905151"><i class="material-icons">phone</i>Phone</a>
+                        </div>
+                        <div id="app">
+                          <a href="subscribe.html"><i class="material-icons">drafts</i>Subscribe</a>
+                        </div>
+                      </section>
+                    <section id="lower-footer">
+                        <div id="social-media">
+                          <a href="https://twitter.com" target="_blank">
+                            <img src="./images/twitter.png" alt="Twitter" width="20" height="20" />
+                          </a>
+                          <a href="https://facebook.com" target="_blank">
+                            <img src="./images/facebook.png" alt="Facebook" width="20" height="20" />
+                          </a>
+                          <a href="https://instagram.com" target="_blank">
+                            <img src="./images/instagram.png" alt="Instagram" width="20" height="20" />
+                          </a>
+                        </div>
+                        <div id="policy">
+                          <div>Privacy Policy</div>
+                          <div>Terms & Conditions</div>
+                          <div>Site Feedback</div>
+                        </div>
+                        <div id="copy">
+                          &copy; Shamima Rahman 2020
+                        </div>
+                    </section>
+                </div>
+                
+            </main>
+            <script type="text/javascript" src="index.js"></script>
+        </body>
+</html>
