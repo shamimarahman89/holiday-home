@@ -46,28 +46,51 @@ function ensureLogin(req, res, next) {
       next();
     }
   }
+// This is a middleware function for checking if an admin is logged in or not
+function ensureAdminLogin(req, res, next) {
+  if(req.session.user === undefined || req.session.user.userType !== "admin"){
+    res.redirect("/");
+  } 
+  else {
+    next();
+  }
+}
+
 
 // setup a 'route' to listen on the default url path (http://localhost)
 router.get("/", function(req,res){
-    res.sendFile(path.join(__dirname, '../views', 'index.html'));
-});
-
+  res.render('index',{ data: req.session.user, layout: false }); 
+    
+}); 
 router.get("/rooms", function(req,res){
-    res.sendFile(path.join(__dirname, '../views', 'roomListing.html'));
+    Room.find({}).lean()
+    .exec()
+    .then((room) => {
+      res.render("roomListing", {data: room, layout: false});
+    })
+    .catch((err) => {
+      console.log(`There was an error: ${err}`);
+      var errormessage = "Sorry something went wrong."
+      res.render('error_dashboard', {
+        error: errormessage,
+        layout: false 
+      }); 
+    });
+  
 });
 
 router.get("/signup", function(req,res){
-    res.sendFile(path.join(__dirname, '../views', 'signup.html'));
+  res.render('signup',{ data: req.session.user, layout: false });
 });
 
 // a route that ensures that the session is set and user is logged in
 router.get("/regular-dashboard", ensureLogin, (req, res) => {
-    res.render("regular-user-dashboard", {user: req.session.user, layout: false});
+    res.render("regular-user-dashboard", {data: req.session.user, layout: false});
 });
 
 // a route that ensures that the session is set and user is logged in
-router.get("/admin-dashboard", ensureLogin, (req, res) => {
-    res.render("admin-user-dashboard", {user: req.session.user, layout: false});
+router.get("/admin-dashboard", ensureAdminLogin, (req, res) => {
+    res.render("admin-user-dashboard", {data: req.session.user, layout: false});
 });
 
 
@@ -182,7 +205,8 @@ router.post("/signup-submit", (req, res) => {
                 req.session.user = {
                     firstName: user[0].firstName,
                     lastName: user[0].lastName,
-                    userType: user[0].userType
+                    userType: user[0].userType,
+                    login: true
                 };
 
                 if(user[0].userType === "regular"){
@@ -218,8 +242,8 @@ router.get("/logout", function(req, res) {
   res.redirect("/");
 });
 
-router.get("/create-listing", function(req,res){
-  res.sendFile(path.join(__dirname, '../views', 'admin_listing.html'));
+router.get("/create-listing", ensureAdminLogin, function(req,res){
+  res.render("admin_listing", {data: req.session.user, layout: false});
 });
 
 router.post("/submit-listing", upload.single("room_image"), (req,res) => {
@@ -247,7 +271,7 @@ router.post("/submit-listing", upload.single("room_image"), (req,res) => {
     }
     else {
       console.log("Listing Saved successfully");
-      res.redirect("/lising-success");
+      res.render("list_success", {data: req.session.user, layout: false});
     }
   });
     
@@ -255,7 +279,7 @@ router.post("/submit-listing", upload.single("room_image"), (req,res) => {
   
 });
 
-router.get("/lising-success", function(req,res){
-  res.sendFile(path.join(__dirname, '../views', 'list_success.html'));
+router.get("/lising-success", ensureAdminLogin,  function(req,res){
+  res.render("list_success", {data: req.session.user, layout: false});
 });
   module.exports = router;
