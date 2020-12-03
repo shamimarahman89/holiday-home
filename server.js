@@ -17,6 +17,7 @@ app.set('view engine', '.hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+
 // Setup client-sessions
 app.use(clientSessions({
   cookieName: "session", // this is the object name that will be added to 'req'

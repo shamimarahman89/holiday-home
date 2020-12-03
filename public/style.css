@@ -323,3 +323,10 @@ main {
     margin: 5em;
     padding-left: 2em;
 }
+.admin_listingForm{
+    box-sizing: border-box;
+    margin: 5em;
+    display: grid;
+    border: 2px solid rgb(126, 123, 123);
+
+}

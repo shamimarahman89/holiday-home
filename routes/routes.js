@@ -3,9 +3,27 @@ var router = express.Router();
 const path = require("path");
 var nodemailer = require('nodemailer');
 var User = require('../models/user');
+var Room = require('../models/room');
 var bcrypt = require('bcryptjs');
 require('dotenv').config();
+const multer = require("multer");
 
+
+// multer requires a few options to be setup to store files with file extensions
+// by default it won't store extensions for security reasons
+const storage = multer.diskStorage({
+  destination: "./public/images/listing",
+  filename: function (req, file, cb) {
+    // we write the filename as the current date down to the millisecond
+    // in a large web service this would possibly cause a problem if two people
+    // uploaded an image at the exact same time. A better way would be to use GUID's for filenames.
+    // this is a simple example.
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+// tell multer to use the diskStorage function for naming files instead of the default.
+const upload = multer({ storage: storage });
 
 var transporter = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
@@ -76,7 +94,7 @@ router.post("/signup-submit", (req, res) => {
         // bcrypt.compareSync("B4c0/\/", hash); // true
       
   
-        // creating model for db insert
+        // creating model for db insert user
         var newUser = new User({
           "email": signupData.email,
           "firstName": signupData.firstname,
@@ -196,10 +214,48 @@ router.post("/signup-submit", (req, res) => {
 
 // route for logout
 router.get("/logout", function(req, res) {
-    req.session.reset();
-    res.redirect("/");
+  req.session.reset();
+  res.redirect("/");
+});
+
+router.get("/create-listing", function(req,res){
+  res.sendFile(path.join(__dirname, '../views', 'admin_listing.html'));
+});
+
+router.post("/submit-listing", upload.single("room_image"), (req,res) => {
+  var roomData = req.body;
+  var roomFile = req.file;
+  
+
+  // creating model for db insert user
+  var newRoom = new Room({
+    "roomTitle": roomData.room_title,
+    "roomPrice": roomData.room_price,
+    "roomDetail": roomData.room_detail,
+    "roomLocation": roomData.room_location,
+    "roomImage": roomFile.filename 
   });
+  // save the user
+  newRoom.save((err) => {
+    if(err) {
+      console.log(`There was an error saving the user : ${err}`);
+      var errormessage = "Sorry something went wrong."
+      res.render('error_dashboard', {
+        error: errormessage,
+        layout: false 
+      }); 
+    }
+    else {
+      console.log("Listing Saved successfully");
+      res.redirect("/lising-success");
+    }
+  });
+    
 
+  
+});
 
-
+router.get("/lising-success", function(req,res){
+  res.sendFile(path.join(__dirname, '../views', 'list_success.html'));
+});
   module.exports = router;
