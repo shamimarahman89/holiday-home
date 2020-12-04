@@ -17,13 +17,37 @@
             </div>
 
             <div id="search-wrapper">
-                <input value="Start your search" />
-                <button><i class="material-icons">search</i></button>  
+                <form action="/search" method="POST">  
+                  <label for="city">WHERE</label>
+                  <select
+                      id="city"
+                      name="city"
+                      type="text"
+                      tabindex="1"
+                      placeholder="Anywhere"
+                  >
+                  >
+                      <option>Toronto</option>
+                      <option>Vaughan</option>
+                      <option>Brampton</option>
+                      <option>Hamilton</option>
+                      <option>London</option>
+                      <option>Richmond Hill</option>
+                      <option>Kitchener</option>
+                      <option>Windsor</option>
+                      <option>Mississauga</option>
+                      <option>Barrie</option>
+                      <option>Guelph</option>
+                      <option>Oshawa</option>
+                      <option>Waterloo</option>
+                  </select>
+                  <input id="search" type="submit" name="submit" value="SEARCH" tabindex="2">  
+                </form>
             </div>
             <div id="user-options">
               {{#if data.login}}
                 <div class="login">
-                    <i class="material-icons" onclick= data.firstName >account_circle</i>
+                    <i class="material-icons" >account_circle</i>
                 </div> 
                  
                 <div class="dropdown">
@@ -86,12 +110,13 @@
                 <section id="i-content">
                   {{#each data}}
                     <figure>
+                      <a href="/room-detail?roomId={{_id}}">
                         <img src="./images/listing/{{roomImage}}" width= "350px" height= "250px">
                         <figcaption> {{roomTitle}}  <br> 
                                       CAD {{roomPrice}} per night  <br>
-                                      {{roomDetail}} <br>
                                       {{roomLocation}}
                         </figcaption>
+                      </a>
                     </figure>
                   {{else}}
                       No Data Available

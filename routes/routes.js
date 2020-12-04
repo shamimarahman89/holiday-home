@@ -62,22 +62,7 @@ router.get("/", function(req,res){
   res.render('index',{ data: req.session.user, layout: false }); 
     
 }); 
-router.get("/rooms", function(req,res){
-    Room.find({}).lean()
-    .exec()
-    .then((room) => {
-      res.render("roomListing", {data: room, layout: false});
-    })
-    .catch((err) => {
-      console.log(`There was an error: ${err}`);
-      var errormessage = "Sorry something went wrong."
-      res.render('error_dashboard', {
-        error: errormessage,
-        layout: false 
-      }); 
-    });
-  
-});
+
 
 router.get("/signup", function(req,res){
   res.render('signup',{ data: req.session.user, layout: false });
@@ -257,7 +242,10 @@ router.post("/submit-listing", upload.single("room_image"), (req,res) => {
     "roomPrice": roomData.room_price,
     "roomDetail": roomData.room_detail,
     "roomLocation": roomData.room_location,
-    "roomImage": roomFile.filename 
+    "roomImage": roomFile.filename,
+    "roomStart": roomData.room_start,
+    "roomEnd": roomData.room_end,
+    "roomGuest": roomData.room_guest 
   });
   // save the user
   newRoom.save((err) => {
@@ -282,4 +270,69 @@ router.post("/submit-listing", upload.single("room_image"), (req,res) => {
 router.get("/lising-success", ensureAdminLogin,  function(req,res){
   res.render("list_success", {data: req.session.user, layout: false});
 });
-  module.exports = router;
+
+
+
+router.get("/rooms", function(req,res){
+    Room.find({}).lean()
+    .exec()
+    .then((room) => {
+      res.render("roomListing", {data: room, layout: false});
+    })
+    .catch((err) => {
+      console.log(`There was an error: ${err}`);
+      var errormessage = "Sorry something went wrong."
+      res.render('error_dashboard', {
+        error: errormessage,
+        layout: false 
+      }); 
+    });
+  
+});
+
+router.post("/search", function(req,res){
+  var formData = req.body
+  Room.find({roomLocation: formData.city}).lean()
+  .exec()
+  .then((room) => {
+    res.render("roomListing", {data: room, layout: false});
+  })
+  .catch((err) => {
+    console.log(`There was an error: ${err}`);
+    var errormessage = "Sorry something went wrong."
+    res.render('error_dashboard', {
+      error: errormessage,
+      layout: false 
+    }); 
+  });
+
+});
+
+
+router.get("/room-detail", function(req,res){
+  if(req.query.roomId === undefined) {
+    res.render('error_dashboard', {
+      error: "Sorry something went wrong",
+      layout: false 
+    }); 
+  }
+  else {
+    Room.findById(req.query.roomId).lean()
+    .exec()
+    .then((room) => {
+      console.log(room);
+      res.render('room_detail', {data: room, layout: false});
+    })
+    .catch((err) => {
+      console.log(`There was an error: ${err}`);
+      var errormessage = "Sorry something went wrong."
+      res.render('error_dashboard', {
+        error: errormessage,
+        layout: false 
+      }); 
+    });
+  }
+});
+
+
+module.exports = router;

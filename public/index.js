@@ -67,4 +67,22 @@ function _setAge(textbox) {
   return true;
 }
 
+const checkinDate = document.getElementById('checkin-date');
+const checoutDate = document.getElementById('checkout-date');
 
+checkinDate.addEventListener('change', (event) => {
+  console.log("Checkin date: " + checkinDate.value);
+  console.log("Checkout date" + checoutDate.value );
+});
+
+checoutDate.addEventListener('change', (event) => {
+  console.log("Checkin date: " + checkinDate.value);
+  console.log("Checkout date" + checoutDate.value );
+});
+
+
+// // calculate price
+// function calculatePrice(startDate, endDate){
+//   console.log(startDate , endDate);
+
+// }

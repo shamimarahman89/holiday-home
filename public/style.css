@@ -29,29 +29,14 @@ header {
     margin-top: 25px;
     display: flex;
     flex: 1;
-    border: 1px solid lightgray;
-    border-radius: 20px;
-    max-width: 225px;
-    height: 40px;
+    align-items: stretch;
+    justify-content: center;
+    
 }
-#search-wrapper input {
-    padding-left: 10px;
-    font-size: 1em;
-    border: solid white;
-    border-radius: 25px; 
-    background-color: solid white;
+#search-wrapper label{
+    padding-left:2em;
 }
-#search-wrapper button {
-    color: white;
-    height: 35px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border: solid rgb(71, 17, 41);
-    background-color: rgb(71, 17, 41);
-    border-radius: 25px;
-    max-width: 35px;
-    margin-top: 2px;
-}
+
 #user-options {
     margin: 20px;
     padding-left: 100px;
@@ -126,6 +111,24 @@ header {
 }
 .show {
     display: block;
+}
+
+.welcoming{
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 1px solid lightgray;
+    max-width: 90%;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-left: 80px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    background-color: #bdbc94;
+}
+.welcoming h2{
+    text-align: center;
 }
 .signupForm {
     box-sizing: border-box;
@@ -254,26 +257,6 @@ main {
 .form-container .btn:hover, .open-button:hover {
     opacity: 1;
 }
-.bookingForm{
-    box-sizing: border-box;
-    border-radius: 25px;
-    border: 1px solid lightgray;
-    max-width: 90%;
-    align-items: stretch;
-    justify-content: space-between;
-    margin-left: 80px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-left: 30px;
-    padding-bottom: 10px;
-    background-color: #bdbc94;
-}
-.bookingForm h2{
-    text-align: center;
-}
-.bookingForm label{
-    padding-left:2em;
-}
 .container{
     width: 100%;
     height: 650px;
@@ -328,5 +311,69 @@ main {
     margin: 5em;
     display: grid;
     border: 2px solid rgb(126, 123, 123);
+
+}
+/* roomdetail page design */
+
+.upper-roomdetail{
+    margin: 20px;
+    padding-left: 2em;
+}
+.detail-i-container{
+    width: 100%;
+    height: 350px;
+    margin: 20px;
+    padding-left: 2em;
+}
+.detail-i-container img{
+    width: 90%;
+    height: auto;
+}
+@supports(object-fit: cover){
+    .detail-i-container img{
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+.lower-roomdetail{
+    padding-left: 2em;
+}
+.bookingForm{
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 1px solid lightgray;
+    max-width: 90%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 40px;
+    padding-bottom: 10px;
+    background-color: #73927f;
+}
+.bookingForm h2{
+    text-align: center;
+}
+.bookingForm label{
+    padding-left:5em;
+}
+
+.bookingForm input[type="submit"]{
+    width: 30%;
+    background-color: rgb(156, 198, 243);
+}
+.bookingForm input[type="submit"]:hover,
+.bookingForm input[type="submit"]:focus{
+    background-color: rgb(164, 164, 230);
+}
+.bookingForm input:focus{
+    outline: 1px solid lightskyblue;
+}
+.reserve{
+    margin-top: 2em;
+    margin-left: 500px;
+    margin-right: 200px;
 
 }

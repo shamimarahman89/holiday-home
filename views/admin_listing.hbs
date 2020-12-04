@@ -20,8 +20,32 @@
             </div>
 
             <div id="search-wrapper">
-                <input value="Start your search" />
-                <button><i class="material-icons">search</i></button>  
+                <form action="/search" method="POST">   
+                  <label for="city">WHERE</label>
+                  <select
+                      id="city"
+                      name="city"
+                      type="text"
+                      tabindex="1"
+                      placeholder="Anywhere"
+                  >
+                  >
+                      <option>Toronto</option>
+                      <option>Vaughan</option>
+                      <option>Brampton</option>
+                      <option>Hamilton</option>
+                      <option>London</option>
+                      <option>Richmond Hill</option>
+                      <option>Kitchener</option>
+                      <option>Windsor</option>
+                      <option>Mississauga</option>
+                      <option>Barrie</option>
+                      <option>Guelph</option>
+                      <option>Oshawa</option>
+                      <option>Waterloo</option>
+                  </select>
+                  <input id="search" type="submit" name="submit" value="SEARCH" tabindex="2">  
+                </form>
             </div>
             <div id="user-options">
               {{#if data.login}}
@@ -122,6 +146,40 @@
                     tabindex="5"
                     accept="image/png, image/jpeg"
                 >
+                <label for="room_start">Start Date</label>
+                    <input
+                    id="room_start"
+                    name="room_start"
+                    type="date"
+                    tabindex="6"
+                    >
+                    <label for="room_end">End Date</label>
+                    <input
+                    id="room_end"
+                    name="room_end"
+                    type="date"
+                    tabindex="7"
+                    >
+                
+                    <label for="room_guest">GUESTS</label>
+                    <select
+                        id="room_guest"
+                        name="room_guest"
+                        type="number"
+                        tabindex="8"
+                    >
+                    >
+                        <option>1 guest</option>
+                        <option>2 guests</option>
+                        <option>3 guests</option>
+                        <option>4 guests</option>
+                        <option>5 guests</option>
+                        <option>6 guests</option>
+                        <option>7 guests</option>
+                        <option>8 guests</option>
+                        <option>9 guests</option>
+                        <option>10 guests</option>
+                    >
                 <button type="submit" class= "submit" > Submit </button>
             </form>
         </div>

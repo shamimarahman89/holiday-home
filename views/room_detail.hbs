@@ -17,7 +17,7 @@
             </div>
 
             <div id="search-wrapper">
-                <form action="/search" method="POST">  
+                <form action="/search" method="POST">   
                   <label for="city">WHERE</label>
                   <select
                       id="city"
@@ -103,30 +103,73 @@
             
         </header>
         <main>
-            <div class="welcoming">
-                <form action="/action_page.php"></form>
-                    <h2> Book unique place to stay and things to do.</h2>
-                </form>
-            </div>
-            <section id="home-body">
-              <div class="container">
-                <img src="./images/vacpic1.png" alt="vacationhome"/>
-              </div>
-              <div class="row">
-                <div class="column"> 
-                  <img src="./images/boot_home.jpeg" alt="First" style="width:100%"> 
-                  <p><b>Unique Stays</b> <br>Spaces that are more than just a place to sleep.</p> 
+            <section id="details-room">
+                <div class="upper-roomdetail">
+                    <h2> <b> {{data.roomTitle}} </b></h2>
+                    <h4> Location- <u>{{data.roomLocation}} </u> </h4>
                 </div>
-                <div class="column">
-                  <img src="./images/online-tour.jpeg" alt="Second" style="width:100%">
-                  <p><b>Online Experience</b> <br> New way to travel from home.</p>
+                <div class="detail-i-container">
+                    <img src="./images/listing/{{data.roomImage}}" alt="roomphoto"/>
                 </div>
-                <div class="column">
-                  <img src="./images/family-home.jpeg" alt="Third" style="width:100%">
-                  <p><b>Entire Homes</b><br>Comfortable private places, with room for friends or family.</p>
+                <div class="lower-roomdetail">
+                    <h3> {{data.roomDetail}}</h3>
+                    <h3> {{data.roomGuest}} Guest:</h3>
+                    <h3> Price per night CAD {{data.roomPrice}} </h3>
                 </div>
-              </div>
-            </section>
+                <div class="bookingForm"> 
+                  <form action="/" method= "POST">
+                    <div id="b-detail">
+                      <h2> Book the room here</h2>
+                      <label for="checkin">CHECK-IN</label>
+                      <input
+                        id="checkin-date"
+                        name="checkin-date"
+                        type="date"
+                        tabindex="1"
+                      >
+                      <label for="checkout">CHECK-OUT</label>
+                      <input
+                        id="checkout-date"
+                        name="checkout-date"
+                        type="date"
+                        tabindex="2"
+                      >
+                  
+                      <label for="guest">GUESTS</label>
+                      <select
+                          id="guestNum"
+                          name="guestNum"
+                          type="number"
+                          tabindex="3"
+                      >
+                      >
+                          <option>1 guest</option>
+                          <option>2 guests</option>
+                          <option>3 guests</option>
+                          <option>4 guests</option>
+                          <option>5 guests</option>
+                          <option>6 guests</option>
+                          <option>7 guests</option>
+                          <option>8 guests</option>
+                          <option>9 guests</option>
+                          <option>10 guests</option>
+                      >
+                      </select>
+                      <label for="total-price">Total</label>
+                      <input
+                        id="total-price"
+                        name="total-price"
+                        type="number"
+                        tabindex="4"
+                      >
+                    </div>
+                    <div class="reserve">
+                      <input type="submit" name="submit" value="Book" tabindex="5">
+                    </div> 
+                  </form>
+                </div>
+
+
             <div id="footer">
                 <section id="upper-footer">
                     <div id="email">

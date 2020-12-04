@@ -11,7 +11,10 @@ var roomSchema = new Schema({
   "roomPrice": Number,
   "roomDetail": String,
   "roomLocation": String,
-  "roomImage": String 
+  "roomImage": String,
+  "roomStart": Date,
+  "roomEnd": Date,
+  "roomGuest": Number 
 });
 
 var Room = mongoose.model("rooms", roomSchema)

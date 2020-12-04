@@ -22,9 +22,33 @@
         </div>
 
         <div id="search-wrapper">
-            <input value="Start your search" />
-            <button><i class="material-icons">search</i></button>  
-        </div>
+                <form action="/search" method="POST">  
+                  <label for="city">WHERE</label>
+                  <select
+                      id="city"
+                      name="city"
+                      type="text"
+                      tabindex="1"
+                      placeholder="Anywhere"
+                  >
+                  >
+                      <option>Toronto</option>
+                      <option>Vaughan</option>
+                      <option>Brampton</option>
+                      <option>Hamilton</option>
+                      <option>London</option>
+                      <option>Richmond Hill</option>
+                      <option>Kitchener</option>
+                      <option>Windsor</option>
+                      <option>Mississauga</option>
+                      <option>Barrie</option>
+                      <option>Guelph</option>
+                      <option>Oshawa</option>
+                      <option>Waterloo</option>
+                  </select>
+                  <input id="search" type="submit" name="submit" value="SEARCH" tabindex="2">  
+                </form>
+            </div>
         <div id="user-options">
           {{#if data.login}}
             <div class="login">
@@ -125,7 +149,7 @@
                         required
                     >
                     <h3>Birthday</h3>
-                    <p>To sign up, you need to be at least 18. Other people who use Airbnb won't see your birthday. </p>
+                    <p>To sign up, you need to be at least 18. Other people who use Holiday & Home won't see your birthday. </p>
                     <input
                         id="birth-date"
                         oninput="_setAge(this);"
