@@ -67,22 +67,39 @@ function _setAge(textbox) {
   return true;
 }
 
-const checkinDate = document.getElementById('checkin-date');
-const checoutDate = document.getElementById('checkout-date');
 
-checkinDate.addEventListener('change', (event) => {
-  console.log("Checkin date: " + checkinDate.value);
-  console.log("Checkout date" + checoutDate.value );
-});
+// calculate price
+function calculatePrice(pricePerDay) {
+  const startDate = document.getElementById('checkin-date').value;
+  const endDate = document.getElementById('checkout-date').value;
+  if(startDate === undefined || startDate === "" ||
+    endDate === undefined || endDate === "" || 
+    pricePerDay === undefined || pricePerDay === "" ){
+    document.getElementById('total-price').value = 0;
+  }
+  else{
+    // difference in milisecond
+    var timeDiff = new Date(endDate) - new Date(startDate);
+    if(timeDiff < 0){
+      document.getElementById('total-price').value = 0;
+    }
+    else {
+      // convert milisecond difference to day
+      var dayDiff = timeDiff / (24 * 3600 * 1000);
+      var totalPrice = dayDiff * pricePerDay;
+      document.getElementById('total-price').value = totalPrice;
+    }
+    
+  }  
+}
 
-checoutDate.addEventListener('change', (event) => {
-  console.log("Checkin date: " + checkinDate.value);
-  console.log("Checkout date" + checoutDate.value );
-});
-
-
-// // calculate price
-// function calculatePrice(startDate, endDate){
-//   console.log(startDate , endDate);
-
-// }
+ // Login validation on form submit
+function validateBooking(isLoggedIn){
+  if(isLoggedIn === undefined || isLoggedIn === false ){
+    alert("Please login");
+    return false;
+  }
+  else{
+    return true;
+  }
+}

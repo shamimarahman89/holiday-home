@@ -46,7 +46,7 @@
                 </form>
             </div>
             <div id="user-options">
-              {{#if data.login}}
+              {{#if data.session.login}}
                 <div class="login">
                     <i class="material-icons" onclick= data.firstName >account_circle</i>
                 </div> 
@@ -105,7 +105,7 @@
         </header>
         <main>
             <div id=dashboardBody>
-                <h2> Welcome !  {{data.firstName}} {{data.lastName}} </h2>
+                <h2> Welcome !  {{data.session.firstName}} {{data.session.lastName}} </h2>
                 <class =logout-link>
                     <form method="get" action="/logout">
                         <button type="submit" class="btn">Logout</button>

@@ -45,7 +45,7 @@
                 </form>
             </div>
             <div id="user-options">
-              {{#if data.login}}
+              {{#if data.session.login}}
                 <div class="login">
                     <i class="material-icons" >account_circle</i>
                 </div> 
@@ -108,7 +108,7 @@
                     <h1>Room Listing  </h1>
                 </section>
                 <section id="i-content">
-                  {{#each data}}
+                  {{#each data.room}}
                     <figure>
                       <a href="/room-detail?roomId={{_id}}">
                         <img src="./images/listing/{{roomImage}}" width= "350px" height= "250px">

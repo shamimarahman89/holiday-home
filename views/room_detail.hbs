@@ -45,7 +45,7 @@
                 </form>
             </div>
             <div id="user-options">
-              {{#if data.login}}
+              {{#if data.session.login}}
                 <div class="login">
                     <i class="material-icons" onclick= data.firstName >account_circle</i>
                 </div> 
@@ -105,19 +105,19 @@
         <main>
             <section id="details-room">
                 <div class="upper-roomdetail">
-                    <h2> <b> {{data.roomTitle}} </b></h2>
-                    <h4> Location- <u>{{data.roomLocation}} </u> </h4>
+                    <h2> <b> {{data.room.roomTitle}} </b></h2>
+                    <h4> Location- <u>{{data.room.roomLocation}} </u> </h4>
                 </div>
                 <div class="detail-i-container">
-                    <img src="./images/listing/{{data.roomImage}}" alt="roomphoto"/>
+                    <img src="./images/listing/{{data.room.roomImage}}" alt="roomphoto"/>
                 </div>
                 <div class="lower-roomdetail">
-                    <h3> {{data.roomDetail}}</h3>
-                    <h3> {{data.roomGuest}} Guest:</h3>
-                    <h3> Price per night CAD {{data.roomPrice}} </h3>
+                    <h3> {{data.room.roomDetail}}</h3>
+                    <h3> {{data.room.roomGuest}} Guest:</h3>
+                    <h3> Price per night CAD {{data.room.roomPrice}} </h3>
                 </div>
                 <div class="bookingForm"> 
-                  <form action="/" method= "POST">
+                  <form action="/" method= "POST" onsubmit = "event.preventDefault(); validateBooking({{data.session.login}});">
                     <div id="b-detail">
                       <h2> Book the room here</h2>
                       <label for="checkin">CHECK-IN</label>
@@ -126,13 +126,15 @@
                         name="checkin-date"
                         type="date"
                         tabindex="1"
+                        onchange="calculatePrice({{data.room.roomPrice}})"
                       >
                       <label for="checkout">CHECK-OUT</label>
                       <input
-                        id="checkout-date"
-                        name="checkout-date"
-                        type="date"
-                        tabindex="2"
+                        id="checkout-date" 
+                        name="checkout-date" 
+                        type="date" 
+                        tabindex="2" 
+                        onchange="calculatePrice({{data.room.roomPrice}})"
                       >
                   
                       <label for="guest">GUESTS</label>
@@ -161,6 +163,7 @@
                         name="total-price"
                         type="number"
                         tabindex="4"
+                        readonly
                       >
                     </div>
                     <div class="reserve">

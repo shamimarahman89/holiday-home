@@ -65,17 +65,17 @@ router.get("/", function(req,res){
 
 
 router.get("/signup", function(req,res){
-  res.render('signup',{ data: req.session.user, layout: false });
+  res.render('signup',{ data: {"session": req.session.user}, layout: false });
 });
 
 // a route that ensures that the session is set and user is logged in
 router.get("/regular-dashboard", ensureLogin, (req, res) => {
-    res.render("regular-user-dashboard", {data: req.session.user, layout: false});
+    res.render("regular-user-dashboard", {data: {"session": req.session.user}, layout: false});
 });
 
 // a route that ensures that the session is set and user is logged in
 router.get("/admin-dashboard", ensureAdminLogin, (req, res) => {
-    res.render("admin-user-dashboard", {data: req.session.user, layout: false});
+    res.render("admin-user-dashboard", {data: {"session": req.session.user}, layout: false});
 });
 
 
@@ -228,7 +228,7 @@ router.get("/logout", function(req, res) {
 });
 
 router.get("/create-listing", ensureAdminLogin, function(req,res){
-  res.render("admin_listing", {data: req.session.user, layout: false});
+  res.render("admin_listing", {data: {"session": req.session.user}, layout: false});
 });
 
 router.post("/submit-listing", upload.single("room_image"), (req,res) => {
@@ -243,8 +243,6 @@ router.post("/submit-listing", upload.single("room_image"), (req,res) => {
     "roomDetail": roomData.room_detail,
     "roomLocation": roomData.room_location,
     "roomImage": roomFile.filename,
-    "roomStart": roomData.room_start,
-    "roomEnd": roomData.room_end,
     "roomGuest": roomData.room_guest 
   });
   // save the user
@@ -259,7 +257,7 @@ router.post("/submit-listing", upload.single("room_image"), (req,res) => {
     }
     else {
       console.log("Listing Saved successfully");
-      res.render("list_success", {data: req.session.user, layout: false});
+      res.render("list_success", {data: {"session": req.session.user}, layout: false});
     }
   });
     
@@ -268,7 +266,7 @@ router.post("/submit-listing", upload.single("room_image"), (req,res) => {
 });
 
 router.get("/lising-success", ensureAdminLogin,  function(req,res){
-  res.render("list_success", {data: req.session.user, layout: false});
+  res.render("list_success", {data: {"session": req.session.user}, layout: false});
 });
 
 
@@ -277,7 +275,7 @@ router.get("/rooms", function(req,res){
     Room.find({}).lean()
     .exec()
     .then((room) => {
-      res.render("roomListing", {data: room, layout: false});
+      res.render("roomListing", {data: {"session": req.session.user, "room" : room}, layout: false});
     })
     .catch((err) => {
       console.log(`There was an error: ${err}`);
@@ -295,7 +293,7 @@ router.post("/search", function(req,res){
   Room.find({roomLocation: formData.city}).lean()
   .exec()
   .then((room) => {
-    res.render("roomListing", {data: room, layout: false});
+    res.render("roomListing", {data: {"session": req.session.user, "room" : room}, layout: false});
   })
   .catch((err) => {
     console.log(`There was an error: ${err}`);
@@ -321,7 +319,7 @@ router.get("/room-detail", function(req,res){
     .exec()
     .then((room) => {
       console.log(room);
-      res.render('room_detail', {data: room, layout: false});
+      res.render('room_detail', {data: {"session": req.session.user, "room" : room}, layout: false});
     })
     .catch((err) => {
       console.log(`There was an error: ${err}`);

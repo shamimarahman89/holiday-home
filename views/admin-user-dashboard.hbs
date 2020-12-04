@@ -46,7 +46,7 @@
                 </form>
             </div>
             <div id="user-options">
-              {{#if data.login}}
+              {{#if data.session.login}}
                 <div class="login">
                     <i class="material-icons" onclick= data.firstName >account_circle</i>
                 </div> 
@@ -106,7 +106,7 @@
         <main>
             <div id=dashboardBody>
                 <h1> Admin Dashboard </h1>
-                <h2> Welcome !  {{data.firstName}} {{data.lastName}} </h2>
+                <h2> Welcome !  {{data.session.firstName}} {{data.session.lastName}} </h2>
                 <p><a href="/create-listing"> For room listing click here</a></p>
                 
             </div>

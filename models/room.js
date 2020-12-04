@@ -12,8 +12,6 @@ var roomSchema = new Schema({
   "roomDetail": String,
   "roomLocation": String,
   "roomImage": String,
-  "roomStart": Date,
-  "roomEnd": Date,
   "roomGuest": Number 
 });
 
