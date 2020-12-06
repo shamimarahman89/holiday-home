@@ -49,66 +49,70 @@
                 </form>
             </div>
                 <div id="user-options">
-                  {{#if data.session.login}}
-                    <div class="login">
-                        <i class="material-icons" onclick= data.firstName >account_circle</i>
-                    </div> 
+              {{#if data.session.login}}
+                <div class="loginName">
+                    <h3>{{data.session.firstName}}</h3>
+                </div>
+                 
+                <div class="dropdown">
+                  <div class="hamburger" onclick="myFunction()">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                  </div>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="/">Home</a>
+                    <a href="rooms">View Listing</a>
+                    {{#if_eq data.session.userType "admin" }}
+                    <a href="/create-listing">Create Listing</a>
+                    {{/if_eq}}
+                    <a href="logout">Logout</a>
+                  </div>
                      
-                    <div class="dropdown">
-                        <div class="hamburger" onclick="myFunction()">
-                           <div class="bar1"></div>
-                           <div class="bar2"></div>
-                           <div class="bar3"></div>
-                         </div>
-                         <div id="myDropdown" class="dropdown-content">
-                           <a href="/">Home</a>
-                           <a href="rooms">View Listing</a>
-                           <a href="logout">Logout</a>
-                         </div>
-                         
-                    </div>
-                    
                 </div>
-                  {{else}} 
-                    <div class="login">
-                        <i class="material-icons" onclick="openForm()">account_circle</i>
-                    </div>  
+                
+            </div>
+              {{else}} 
+                <div class="login">
+                    <i class="material-icons" onclick="openForm()">account_circle</i>
+                </div>  
+              
+                <div class="form-popup" id="myForm">
+                    <form action="/login-submit" method="POST" class="form-container">
+                      <h1>Login</h1>
                   
-                    <div class="form-popup" id="myForm">
-                        <form action="/login-submit" method="POST" class="form-container">
-                          <h1>Login</h1>
-                      
-                          <label for="email"><b>Email</b></label>
-                          <input type="email" placeholder="Enter Email" name="email" required>
-                      
-                          <label for="psw"><b>Password</b></label>
-                          <input type="password" placeholder="Enter Password" name="password" required>
-                      
-                          <button type="submit" class="btn">Login</button>
-                          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                        </form>
-                      </div> 
-                    <div class="dropdown">
-                        <div class="hamburger" onclick="myFunction()">
-                           <div class="bar1"></div>
-                           <div class="bar2"></div>
-                           <div class="bar3"></div>
-                         </div>
-                         <div id="myDropdown" class="dropdown-content">
-                           <a href="signup">Sign Up</a>
-                           <a href="/">Home</a>
-                           <a href="rooms">Room Listing</a>
-                         </div>
-                         
-                    </div>
-                  {{/if}}
-                    
+                      <label for="email"><b>Email</b></label>
+                      <input type="email" placeholder="Enter Email" name="email" required>
+                  
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="password" required>
+                  
+                      <button type="submit" class="btn">Login</button>
+                      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                  </div> 
+                <div class="dropdown">
+                    <div class="hamburger" onclick="myFunction()">
+                       <div class="bar1"></div>
+                       <div class="bar2"></div>
+                       <div class="bar3"></div>
+                     </div>
+                     <div id="myDropdown" class="dropdown-content">
+                       <a href="signup">Sign Up</a>
+                       <a href="/">Home</a>
+                       <a href="rooms">Room Listing</a>
+                     </div>
+                     
                 </div>
+              {{/if}}
+                
+            </div>
                 
             </header>
             <main>
-              <h3>Listing saved successfully!</h3>
-              <p><a href="/create-listing"> For another room listing click here</a></p>
+              <div id="successMessage">
+                <h2>Listing saved successfully!</h2>
+              </div>
             </main>
             <script type="text/javascript" src="index.js"></script>
         </body>

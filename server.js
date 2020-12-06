@@ -10,11 +10,18 @@ require('dotenv').config();
 const HTTP_PORT = process.env.PORT || 8080;
 
 // Register handlerbars as the rendering engine for views
-app.engine('.hbs', exphbs({ extname: '.hbs' }));
+app.engine('.hbs', exphbs({ 
+  extname: '.hbs' ,
+  helpers: {
+    if_eq: function(arg1, arg2, options) {
+      return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    }
+  } 
+}));
 app.set('view engine', '.hbs');
 
 // Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true}));
 
 
 

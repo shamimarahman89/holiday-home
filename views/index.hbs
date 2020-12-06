@@ -46,21 +46,24 @@
             </div>
             <div id="user-options">
               {{#if data.session.login}}
-                <div class="login">
-                    <i class="material-icons" onclick= data.firstName >account_circle</i>
-                </div> 
+                <div class="loginName">
+                    <h3>{{data.session.firstName}}</h3>
+                </div>
                  
                 <div class="dropdown">
-                    <div class="hamburger" onclick="myFunction()">
-                       <div class="bar1"></div>
-                       <div class="bar2"></div>
-                       <div class="bar3"></div>
-                     </div>
-                     <div id="myDropdown" class="dropdown-content">
-                       <a href="/">Home</a>
-                       <a href="rooms">View Listing</a>
-                       <a href="logout">Logout</a>
-                     </div>
+                  <div class="hamburger" onclick="myFunction()">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                  </div>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="/">Home</a>
+                    <a href="rooms">View Listing</a>
+                    {{#if_eq data.session.userType "admin" }}
+                    <a href="/create-listing">Create Listing</a>
+                    {{/if_eq}}
+                    <a href="logout">Logout</a>
+                  </div>
                      
                 </div>
                 

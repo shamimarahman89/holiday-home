@@ -46,9 +46,34 @@
                 </form>
             </div>
             <div id="user-options">
+              {{#if data.session.login}}
+                <div class="loginName">
+                    <h3>{{data.session.firstName}}</h3>
+                </div>
+                 
+                <div class="dropdown">
+                  <div class="hamburger" onclick="myFunction()">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                  </div>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="/">Home</a>
+                    <a href="rooms">View Listing</a>
+                    {{#if_eq data.session.userType "admin" }}
+                    <a href="/create-listing">Create Listing</a>
+                    {{/if_eq}}
+                    <a href="logout">Logout</a>
+                  </div>
+                     
+                </div>
+                
+            </div>
+              {{else}} 
                 <div class="login">
                     <i class="material-icons" onclick="openForm()">account_circle</i>
-                </div> 
+                </div>  
+              
                 <div class="form-popup" id="myForm">
                     <form action="/login-submit" method="POST" class="form-container">
                       <h1>Login</h1>
@@ -76,9 +101,8 @@
                      </div>
                      
                 </div>
-                
-            </div>
-            
+              {{/if}}    
+            </div>  
         </header>
         <main>
             <div id=dashboardBody>

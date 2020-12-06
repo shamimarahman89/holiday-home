@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Raleway:wght@100&display=swap');
+/* all body of the website */
 html,body {
   height: 100%;
   overflow-anchor: auto;
@@ -6,6 +8,7 @@ body {
   font-family: Roboto, sans-serif;
   margin: 0;
 }
+/* Header styling */
 header {
   display: flex;
   justify-content: space-between;
@@ -16,6 +19,7 @@ header {
   position: fixed;
   top: 0;
 }
+/* logo desigining */ 
 #store_name {
     font-family: monospace;
     font-size: 1.5em;
@@ -25,8 +29,9 @@ header {
     margin-bottom: 20px;
     padding-left: 15px;
 }
+/* Search option desigining*/
 #search-wrapper {
-    margin-top: 25px;
+    margin-top: 30px;
     display: flex;
     flex: 1;
     align-items: stretch;
@@ -36,9 +41,9 @@ header {
 #search-wrapper label{
     padding-left:2em;
 }
-
+/* Login Icon and user bar icon positioning*/
 #user-options {
-    margin: 20px;
+    margin: 10px;
     padding-left: 100px;
     padding-right: 50px;
     display: flex;
@@ -48,16 +53,22 @@ header {
     margin-right: 15px;
     margin-left: 15px;
 }
+/* login Icon positioning*/
 .login{
     padding-right: 20px;
-    padding-top: 10px;
+    padding-top: 20px;
 }
+.loginName {
+    padding-right: 20px;
+    text-align: center;
+}
+/* User bar designing*/
 .hamburger {
     cursor: pointer;
     color: #333;
     list-style: none;
     float: right;
-    padding: 10px;
+    padding: 20px;
     position: relative;
     display: inline-block;
     width: 20px;
@@ -113,6 +124,7 @@ header {
     display: block;
 }
 
+/* After header the welcome section of the body */
 .welcoming{
     box-sizing: border-box;
     border-radius: 25px;
@@ -130,6 +142,8 @@ header {
 .welcoming h2{
     text-align: center;
 }
+
+/* Signup form designing*/
 .signupForm {
     box-sizing: border-box;
     padding-top: 2em;
@@ -166,6 +180,7 @@ header {
 .signupForm button:hover{
     background-color: #214221;
 }
+/* main body section of home page*/ 
 main {
     padding-top: 10vh;
 }
@@ -173,6 +188,7 @@ main {
     display: flex;
     overflow: hidden;
 }
+/* Footer designing and positioning */
 #footer {
     background-color: rgb(223, 217, 220);
     padding-bottom: 10px;
@@ -204,7 +220,7 @@ main {
     justify-content: space-around;
     width: 450px;
 }
-/* The popup form - hidden by default */
+/* The popup loginform - hidden by default */
 .form-popup {
     display: none;
     position: fixed;
@@ -308,16 +324,68 @@ main {
 }
 .admin_listingForm{
     box-sizing: border-box;
-    margin: 5em;
-    display: grid;
-    border: 2px solid rgb(126, 123, 123);
+}
 
+.admin_listingForm form{
+    border: 2px solid rgb(126, 123, 123);
+    margin-top: 3em;
+    padding: 2em;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 20px;
+    align-items: center;
+    max-width: 800px;
+    min-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.admin_listingForm label{
+    font-family: "Raleway", sans-serif;
+    font-size: 1.3em;
+}
+.admin_listingForm input{
+    width: 100%;
+    padding: 0.3em;
+    font-size: 1.5em;
+    border: 1px solid rgb(206, 212, 218);
+}
+.admin_listingForm select{
+    width: 100%;
+    padding: 0.3em;
+    font-size: 1.5em;
+    border: 1px solid rgb(206, 212, 218);
+}
+.admin_listingForm input[type="submit"]{
+    width: 150px;
+    background-color: rgb(116, 175, 238);
+    color: white;
+}
+.roomListingButton{
+    right: 15px;
+    text-align: right;
+}
+#successMessage{
+    margin-left: 20em;
 }
 /* roomdetail page design */
 
 .upper-roomdetail{
     margin: 20px;
     padding-left: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+#editDelete{
+    padding-top: 2em;
+    padding-right: 5em;
+}
+.editForm{
+    padding-bottom: 1em;
+}
+.lower-roomdetail{
+    margin-left: 20px;
+    padding-left: 5em;
 }
 .detail-i-container{
     width: 100%;
@@ -341,6 +409,8 @@ main {
 }
 .bookingForm{
     box-sizing: border-box;
+}
+.bookingForm form{
     border-radius: 25px;
     border: 1px solid lightgray;
     max-width: 90%;
