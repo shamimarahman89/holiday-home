@@ -134,36 +134,36 @@
                     <h3> Price per night CAD {{data.room.roomPrice}} </h3>
                 </div>
                 <div class="bookingForm"> 
-                  <form action="/submit-booking" method= "POST" onsubmit="event.preventDefault();validateBooking({{data.session.login}});">
+                  <form action="/submit-booking" method= "POST">
                     <div id="b-detail">
                       <h2> Book the room here</h2>
                       <label for="checkin">CHECK-IN</label>
                       <input
-                        id="checkin-date"
-                        name="checkin-date"
+                        id="checkin_date"
+                        name="checkin_date"
                         type="date"
                         tabindex="1"
                         onchange="calculatePrice({{data.room.roomPrice}})"
                       >
                       <label for="checkout">CHECK-OUT</label>
                       <input
-                        id="checkout-date" 
-                        name="checkout-date" 
+                        id="checkout_date" 
+                        name="checkout_date" 
                         type="date" 
                         tabindex="2" 
                         onchange="calculatePrice({{data.room.roomPrice}})"
                       >
                       <input
-                        id="room-id" 
-                        name="room-id" 
+                        id="room_id" 
+                        name="room_id" 
                         type="hidden" 
                         value="{{data.room._id}}"
                       >
                       <input
-                        id="user-id" 
-                        name="user-id" 
+                        id="user_id" 
+                        name="user_id" 
                         type="hidden" 
-                        value="{{data.session.id}}"
+                        value="{{data.session._id}}"
                       >
                   
                       <label for="guest">NO OF GUESTS</label>
@@ -188,8 +188,8 @@
                       </select>
                       <label for="total-price">Total</label>
                       <input
-                        id="total-price"
-                        name="total-price"
+                        id="total_price"
+                        name="total_price"
                         type="number"
                         tabindex="4"
                         readonly

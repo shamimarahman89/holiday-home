@@ -69,24 +69,24 @@ function _setAge(textbox) {
 
 // calculate price
 function calculatePrice(pricePerDay) {
-  const startDate = document.getElementById('checkin-date').value;
-  const endDate = document.getElementById('checkout-date').value;
+  const startDate = document.getElementById('checkin_date').value;
+  const endDate = document.getElementById('checkout_date').value;
   if(startDate === undefined || startDate === "" ||
     endDate === undefined || endDate === "" || 
     pricePerDay === undefined || pricePerDay === "" ){
-    document.getElementById('total-price').value = 0;
+    document.getElementById('total_price').value = 0;
   }
   else{
     // difference in milisecond
     var timeDiff = new Date(endDate) - new Date(startDate);
     if(timeDiff < 0){
-      document.getElementById('total-price').value = 0;
+      document.getElementById('total_price').value = 0;
     }
     else {
       // convert milisecond difference to day
       var dayDiff = timeDiff / (24 * 3600 * 1000);
       var totalPrice = dayDiff * pricePerDay;
-      document.getElementById('total-price').value = totalPrice;
+      document.getElementById('total_price').value = totalPrice;
     }
     
   }  
@@ -96,6 +96,7 @@ function calculatePrice(pricePerDay) {
 function validateBooking(isLoggedIn){
   if(isLoggedIn === undefined || isLoggedIn === false ){
     alert("Please login");
+    returnToPreviousPage();
     return false;
   }
   else{

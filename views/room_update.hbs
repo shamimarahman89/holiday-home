@@ -1,23 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Dashboard</title>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href="style.css" type="text/css" />
-    </head>
-    <body>
-        <header>
-            <div id="store_name">
-                <h3>
-                    Holiday & Home
-                </h3>
-            </div>
+            <title>WEB322 Assignment2</title>
+        
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        
+            <link
+              href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"rel="stylesheet"/>
+        
+            <link rel="stylesheet" href="style.css" type="text/css" />
 
-            <div id="search-wrapper">
-                <form action="/search" method="POST">   
+        </head>
+        <body>
+            <header>
+                <div id="store_name">
+                    <h3>
+                        Holiday & Home
+                    </h3>
+                </div>
+    
+                <div id="search-wrapper">
+                <form action="/search" method="POST">  
                   <label for="city">WHERE</label>
                   <select
                       id="city"
@@ -44,12 +48,10 @@
                   <input id="search" type="submit" name="submit" value="SEARCH" tabindex="2">  
                 </form>
             </div>
-            <div id="user-options">
+                <div id="user-options">
               {{#if data.session.login}}
                 <div class="loginName">
-                    <h3>
-                      {{data.session.firstName}}
-                    </h3>
+                    <h3>{{data.session.firstName}}</h3>
                 </div>
                  
                 <div class="dropdown">
@@ -102,16 +104,16 @@
                      </div>
                      
                 </div>
-              {{/if}}   
-            </div>   
-        </header>
-        <main>
-            <div id=error-dashboard-body>
-            <h2> {{error}} </h2>
+              {{/if}}
+                
             </div>
-            
-        </main>
-        <script type="text/javascript" src="index.js"></script>
-    </body>
-
+                
+            </header>
+            <main>
+                <div id="successMessage"> 
+                    <h2>Listing updated successfully!</h2>
+                </div>
+            </main>
+            <script type="text/javascript" src="index.js"></script>
+        </body>
 </html>

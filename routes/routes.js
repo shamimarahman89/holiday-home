@@ -42,7 +42,10 @@ var transporter = nodemailer.createTransport({
 // checking if the user is authenticated
 function ensureLogin(req, res, next) {
     if (req.session.user === undefined) {
-      res.redirect("/");
+      res.render('error_dashboard', {
+        error: "You are not logged in. Please login to continue..",
+        layout: false 
+      }); 
     } else {
       next();
     }
@@ -50,7 +53,10 @@ function ensureLogin(req, res, next) {
 // This is a middleware function for checking if an admin is logged in or not
 function ensureAdminLogin(req, res, next) {
   if(req.session.user === undefined || req.session.user.userType !== "admin"){
-    res.redirect("/");
+    res.render('error_dashboard', {
+      error: "You are not logged in or do not have admin priviledge. Please login with admin credential to continue..",
+      layout: false 
+    });
   } 
   else {
     next();
@@ -189,6 +195,7 @@ router.post("/login-submit", (req, res) => {
               // login successful
               // Add the user on the session and redirect them to the dashboard page.
               req.session.user = {
+                  email: user[0].email,
                   firstName: user[0].firstName,
                   lastName: user[0].lastName,
                   userType: user[0].userType,
@@ -269,6 +276,7 @@ router.get("/lising-success", ensureAdminLogin,  function(req,res){
   res.render("list_success", {data: {"session": req.session.user}, layout: false});
 });
 
+// show the edit listing form
 router.post("/edit-listing-form", ensureAdminLogin, function(req,res){
   var roomId = req.body.room_id;
   if(roomId === undefined){
@@ -282,7 +290,7 @@ router.post("/edit-listing-form", ensureAdminLogin, function(req,res){
     .exec()
     .then((room) => {
       console.log(room);
-      res.render('edit_listing_detail', {data: {"session": req.session.user, "room" : room}, layout: false});
+      res.render('edit_listing', {data: {"session": req.session.user, "room" : room}, layout: false});
     })
     .catch((err) => {
       console.log(`There was an error: ${err}`);
@@ -293,6 +301,44 @@ router.post("/edit-listing-form", ensureAdminLogin, function(req,res){
       }); 
     });
   }  
+});
+
+
+// edit listing in DB after edit listing form is submitted
+router.post("/edit-listing", upload.single("room_image"), function(req,res){
+  var roomData = req.body;
+  var roomFile = req.file;
+  console.log(roomData);
+  var update = {
+    "roomTitle": roomData.room_title,
+    "roomPrice": roomData.room_price,
+    "roomDetail": roomData.room_detail,
+    "roomLocation": roomData.room_location,
+    "roomGuest": roomData.room_guest 
+  };
+  if (roomFile !== undefined){
+    update.roomImage = roomFile.filename;
+  }
+  Room.updateOne(
+    { _id: roomData.room_id}, 
+    { $set: update}  
+  )
+  .exec()
+  .then(() => {
+    res.render("room_update", {data: {"session": req.session.user}, layout: false});
+  })
+  .catch((err) => {
+    console.log(`There was an error: ${err}`);
+    var errormessage = "Sorry something went wrong."
+    res.render('error_dashboard', {
+      error: errormessage,
+      layout: false 
+    }); 
+  });
+
+
+
+  
 });
 
 
@@ -385,22 +431,19 @@ router.get("/room-detail", function(req,res){
   }
 });
 
-router.post("/submit-booking", (req,res) => {
+router.post("/submit-booking", ensureLogin, (req,res) => {
   var bookingData = req.body;
   console.log("Inside booking submit.");
   console.log(bookingData);
-
-  var test = new Date("2020-12-22");
-  console.log(test);
   
   // creating model for db insert booking
   var newBooking = new Booking({
-    "checkinDate": new Date(bookingData.checkin-date),
-    "checkoutDate": new Date(bookingData.checkout-date),
+    "checkinDate": new Date(bookingData.checkin_date),
+    "checkoutDate": new Date(bookingData.checkout_date),
     "guestNum": bookingData.guestNum,
-    "totalPrice": bookingData.total-price,
-    "roomId": bookingData.room-id,
-    "userId": req.session.user.id,
+    "totalPrice": bookingData.total_price,
+    "roomId": bookingData.room_id,
+    "userId": req.session.user._id,
   });
   // save the booking
   newBooking.save((err) => {
@@ -420,8 +463,8 @@ router.post("/submit-booking", (req,res) => {
         to: req.session.user.email,
         subject: 'Booking confirmation',
         text: 'Your booking has been cofirmed. Name of the Guest: ' + req.session.user.firstName + ' ' + req.session.user.lastName + '.' + 
-        'Start date: ' + bookingData.checkin-date + ' End Date: ' + bookingData.checkout-date +'.'+
-        'Total amount is: ' + bookingData.total-price +'.'
+        'Start date: ' + bookingData.checkin_date + ' End Date: ' + bookingData.checkout_date +'.'+
+        'Total amount is: ' + bookingData.total_price +'.'
       };
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
@@ -431,11 +474,12 @@ router.post("/submit-booking", (req,res) => {
           console.log('Email sent: ' + info.response);
         }
       });
-      res.render('booking_success',{data: {"session": req.session.user, "booking" : bookingData},
+      res.render('booking_success',{
+        data: {"session": req.session.user, "booking" : bookingData},
         layout: false 
       });
 
-    };
+    }
   });
 });
 

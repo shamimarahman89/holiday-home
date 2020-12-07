@@ -113,11 +113,19 @@
             <div class="admin_listingForm" id="roomListing">
             <form action="/edit-listing" method="POST" enctype="multipart/form-data">
                 <label for="room_title">Room title</label>
+                <input 
+                    id="room_id"
+                    name="room_id" 
+                    type="hidden"
+                    value="{{data.room._id}}"
+                    tabindex="1"
+                >
                 <input
                     id="room_title"
                     name="room_title"
                     type="text"
-                    tabindex="1"
+                    value="{{data.room.roomTitle}}"
+                    tabindex="2"
                     
                 >
                 <label for="room_price">Price</label>
@@ -125,28 +133,32 @@
                     id="room_price"
                     name="room_price"
                     type="number"
-                    tabindex="2"  
+                    value="{{data.room.roomPrice}}"
+                    tabindex="3"  
                 >
                 <label for="room_detail">Description</label>
                 <input
                     id="room_detail"
                     name="room_detail"
                     type="text"
-                    tabindex="3"  
+                    value="{{data.room.roomDetail}}"
+                    tabindex="4"  
                 >
                 <label for="room_location">Location</label>
                 <input
                     id="room_location"
                     name="room_location"
                     type="text"
-                    tabindex="4"  
+                    value="{{data.room.roomLocation}}"
+                    tabindex="5"  
                 >
                 <label for="room_photo">Upload a photo of the room</label>
                 <input
                     id="room_image"
                     name="room_image"
                     type="file"
-                    tabindex="5"
+                    value="{{data.room.roomPhoto}}"
+                    tabindex="6"
                     accept="image/png, image/jpeg"
                 >
                 
@@ -155,7 +167,8 @@
                     id="room_guest"
                     name="room_guest"
                     type="number"
-                    tabindex="6"
+                    value="{{data.room.roomGuest}}"
+                    tabindex="7"
                 >
                 >
                     <option>1 </option>
@@ -170,7 +183,7 @@
                     <option>10 </option>
                 >
                 <div class= roomListingButton>
-                <input type="submit" name= "submit" value="Submit" tabindex=7>
+                <input type="submit" name= "submit" value="Submit" tabindex=8>
                 </div>
             </form>
             <div id="footer">
