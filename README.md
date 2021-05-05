@@ -1,4 +1,4 @@
-# holiday-home
+# Holiday Home
 
 Dynamic website hosting data for renting house/apartments/hotel rooms/BnB
 
